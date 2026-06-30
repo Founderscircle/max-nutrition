@@ -1,5 +1,6 @@
 import { Send, Mail, MapPin, Clock, MessageSquare } from 'lucide-react'
 import { siteConfig, getTelegramLink } from '../config/site'
+import { InquiryForm } from '../components/InquiryForm'
 
 const contactMethods = [
   {
@@ -92,6 +93,13 @@ export function ContactPage() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div id="form" className="mt-12 scroll-mt-24">
+        <InquiryForm
+          title="Залишити заявку на консультацію"
+          description="Заповніть форму — заявка одразу надійде консультанту. Відповімо протягом 1–2 годин."
+        />
       </div>
 
       <div className="mt-12 rounded-2xl bg-white border border-slate-200 p-8">

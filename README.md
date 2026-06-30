@@ -56,6 +56,22 @@ npm run preview
 
 1. Підключіть репозиторій на [vercel.com](https://vercel.com) (Framework: **Vite**)
 2. Build: `npm run build`, Output: `dist`
-3. Додайте домен `max-nutrition.net.ua` у Vercel → DNS у imena.ua
+3. Додайте **Environment Variables** (див. `.env.example`):
+   - `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` — заявки з форми
+   - `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` — аналітика
+   - `SITE_URL` — `https://max-nutrition.net.ua`
+4. Додайте домен `max-nutrition.net.ua` у Vercel → DNS у imena.ua
 
-`vercel.json` уже налаштований для React Router (SPA).
+### API (serverless)
+
+| Endpoint | Опис |
+|----------|------|
+| `GET /api/stats` | Статистика сайту, трендові продукти |
+| `POST /api/inquiry` | Заявка з форми → Telegram |
+| `POST /api/track` | Трекінг переглядів |
+| `GET /api/products` | Каталог (JSON) |
+| `GET /sitemap.xml` | SEO-карта сайту |
+
+Локально з API: `npm run dev:full` (потрібен Vercel CLI).
+
+`vercel.json` налаштований для React Router (SPA) та API routes.

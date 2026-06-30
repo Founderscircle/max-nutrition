@@ -3,8 +3,11 @@ import { Header } from './Header'
 import { Footer } from './Footer'
 import { LegalBanner } from './LegalBanner'
 import { SiteEffects } from './effects/SiteEffects'
+import { usePageTracking } from '../hooks/usePageTracking'
 
 export function Layout() {
+  usePageTracking()
+
   return (
     <div className="relative flex min-h-screen flex-col">
       <SiteEffects />

@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 import { Send, Shield, BookOpen, MessageCircle, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { siteConfig, getTelegramLink } from '../config/site'
-import { getPopularProducts } from '../data/products'
+import { getPopularProducts, getProductById } from '../data/products'
 import { ProductCard } from '../components/ProductCard'
 import { CategoryGrid } from '../components/CategoryCard'
 import { HeroVisual } from '../components/HeroVisual'
 import { SectionOrb } from '../components/effects/SectionOrb'
+import { SiteStatsBar } from '../components/SiteStatsBar'
+import { useSiteStats } from '../hooks/useSiteStats'
 
 const features = [
   {
@@ -26,7 +28,11 @@ const features = [
 ]
 
 export function HomePage() {
-  const popular = getPopularProducts()
+  const { stats } = useSiteStats()
+  const trending = stats.trendingProductIds
+    .map((id) => getProductById(id))
+    .filter((product): product is NonNullable<typeof product> => Boolean(product))
+  const popular = trending.length >= 4 ? trending.slice(0, 4) : getPopularProducts()
 
   return (
     <>
@@ -79,6 +85,8 @@ export function HomePage() {
         </div>
       </section>
 
+      <SiteStatsBar />
+
       <section className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="grid gap-6 md:grid-cols-3">
           {features.map((f) => (
@@ -103,7 +111,7 @@ export function HomePage() {
       <section className="relative bg-white/80 backdrop-blur-sm border-y border-slate-200/80">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-slate-900">Популярна продукція</h2>
+            <h2 className="text-2xl font-bold text-slate-900">Зараз цікавлять</h2>
             <Link
               to="/catalog"
               className="text-sm font-medium text-brand-600 hover:text-brand-700 flex items-center gap-1"
@@ -128,8 +136,9 @@ export function HomePage() {
             </h2>
             <p className="text-brand-100 max-w-xl mx-auto mb-8">
               Консультант {siteConfig.distributor.names[0]} допоможе підібрати
-              продукцію та оформити замовлення. Зв'яжіться з нами в Telegram.
+              продукцію та оформити замовлення. Напишіть у Telegram або залиште заявку на сторінці контактів.
             </p>
+            <div className="flex flex-wrap justify-center gap-4">
             <a
               href={getTelegramLink('Вітаю! Хочу отримати консультацію та дізнатися про умови замовлення.')}
               target="_blank"
@@ -139,6 +148,13 @@ export function HomePage() {
               <Send className="h-5 w-5" />
               Написати в {siteConfig.telegram.displayName}
             </a>
+            <Link
+              to="/contact#form"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-8 py-4 text-base font-bold text-white hover:bg-white/20 transition-all"
+            >
+              Залишити заявку
+            </Link>
+            </div>
           </div>
         </div>
       </section>

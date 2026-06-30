@@ -3,10 +3,14 @@ import { Send, ArrowLeft, Check, Info } from 'lucide-react'
 import { getProductById, categoryLabels } from '../data/products'
 import { getProductTelegramMessage, getTelegramLink, siteConfig } from '../config/site'
 import { ProductImage } from '../components/ProductImage'
+import { InquiryForm } from '../components/InquiryForm'
+import { useProductTracking } from '../hooks/usePageTracking'
 
 export function ProductDetailPage() {
   const { id } = useParams<{ id: string }>()
   const product = id ? getProductById(id) : undefined
+
+  useProductTracking(product?.id)
 
   if (!product) return <Navigate to="/catalog" replace />
 
@@ -62,6 +66,18 @@ export function ProductDetailPage() {
             <Send className="h-5 w-5" />
             Замовити консультацію в Telegram
           </a>
+
+          <div className="mt-8">
+            <InquiryForm
+              type="product"
+              productId={product.id}
+              productName={product.name}
+              productSku={product.sku}
+              compact
+              title="Або залишити заявку"
+              description="Консультант отримає запит і зв'яжеться з вами."
+            />
+          </div>
 
           <div className="mt-8">
             <h2 className="font-semibold text-slate-900 mb-3">Переваги</h2>
