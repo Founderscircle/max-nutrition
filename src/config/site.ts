@@ -13,12 +13,17 @@ export const siteConfig = {
     phone: '+380 XX XXX XX XX',
   },
   legal: {
+    officialSiteUrl: 'https://www.herbalife.com/uk-ua/',
+    officialSiteLabel: 'Офіційний сайт Herbalife Nutrition',
+    disclaimerVersion: '1',
     companyNote:
       'Цей веб-сайт є інформаційним ресурсом незалежного дистриб\'ютора Herbalife. Не є офіційним сайтом компанії Herbalife Nutrition.',
     noPricesNote:
       'На сайті не розміщено цін та комерційної реклами відповідно до правил дистрибуції Herbalife в Україні.',
     orderNote:
       'Замовлення приймаються виключно через особисту консультацію в Telegram після узгодження деталей.',
+    medicalNote:
+      'Продукція Herbalife Nutrition не є лікарським засобом і не призначена для діагностики, лікування або профілактики захворювань.',
   },
 } as const
 

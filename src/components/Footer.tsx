@@ -51,8 +51,16 @@ export function Footer() {
             <strong className="text-slate-700">Важлива інформація:</strong>{' '}
             {siteConfig.legal.companyNote}{' '}
             {siteConfig.legal.noPricesNote}{' '}
-            Продукція Herbalife Nutrition не є лікарським засобом і не призначена для діагностики, лікування або профілактики захворювань.
-            Результати індивідуальні. Перед вживанням проконсультуйтесь зі спеціалістом.
+            {siteConfig.legal.medicalNote}{' '}
+            Результати індивідуальні. Перед вживанням проконсультуйтесь зі спеціалістом.{' '}
+            <a
+              href={siteConfig.legal.officialSiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-600 hover:text-brand-700 underline underline-offset-2"
+            >
+              {siteConfig.legal.officialSiteLabel}
+            </a>
           </p>
         </div>
 
