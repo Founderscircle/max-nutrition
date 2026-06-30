@@ -30,7 +30,7 @@ export function EthicsDisclaimer() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/70 backdrop-blur-sm overflow-y-auto safe-top safe-bottom"
+      className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/80 overflow-y-auto safe-top safe-bottom"
       role="dialog"
       aria-modal="true"
       aria-labelledby="ethics-disclaimer-title"

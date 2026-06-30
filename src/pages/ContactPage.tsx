@@ -55,6 +55,7 @@ export function ContactPage() {
                 ? 'gradient-brand text-white border-transparent shadow-lg shadow-brand-600/20'
                 : 'bg-white border-slate-200'
             }`}
+            {...(method.primary ? { 'data-glow-zone': 'contrast' } : {})}
           >
             <div className="flex items-start gap-4">
               <div

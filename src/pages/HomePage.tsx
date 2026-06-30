@@ -36,7 +36,7 @@ export function HomePage() {
 
   return (
     <>
-      <section className="gradient-hero relative overflow-hidden">
+      <section className="gradient-hero relative overflow-hidden" data-glow-zone="contrast">
         <SectionOrb variant="mint" size="lg" className="-top-16 -right-24 hidden sm:block" />
         <SectionOrb variant="aqua" size="md" className="bottom-10 -left-16 hidden sm:block" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(20,184,166,0.12),transparent_50%)]" />
@@ -92,7 +92,7 @@ export function HomePage() {
           {features.map((f) => (
             <div
               key={f.title}
-              className="rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/80 p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="rounded-2xl bg-white border border-slate-200/80 p-6 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 mb-4">
                 <f.icon className="h-6 w-6 text-brand-600" />
@@ -108,7 +108,7 @@ export function HomePage() {
         <CategoryGrid />
       </section>
 
-      <section className="relative bg-white/80 backdrop-blur-sm border-y border-slate-200/80">
+      <section className="relative bg-white border-y border-slate-200/80">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 sm:mb-8">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Зараз цікавлять</h2>
@@ -121,7 +121,7 @@ export function HomePage() {
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {popular.map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} />
+              <ProductCard key={product.id} product={product} index={i} animate />
             ))}
           </div>
         </div>

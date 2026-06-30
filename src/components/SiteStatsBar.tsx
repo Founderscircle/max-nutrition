@@ -17,7 +17,7 @@ export function SiteStatsBar() {
     .slice(0, 4)
 
   return (
-    <section className="border-y border-slate-200/80 bg-white/70 backdrop-blur-sm">
+    <section className="border-y border-slate-200/80 bg-white/90 sm:bg-white/70">
       <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6">
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600">

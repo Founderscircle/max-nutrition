@@ -8,13 +8,14 @@ import { ProductImage } from './ProductImage'
 interface ProductCardProps {
   product: Product
   index?: number
+  animate?: boolean
 }
 
-export function ProductCard({ product, index = 0 }: ProductCardProps) {
+export function ProductCard({ product, index = 0, animate = false }: ProductCardProps) {
   return (
     <article
-      className="group flex flex-col overflow-hidden rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:shadow-brand-600/5 hover:border-brand-200 transition-all duration-300 animate-fade-in-up"
-      style={{ animationDelay: `${index * 60}ms` }}
+      className={`group flex flex-col overflow-hidden rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:shadow-brand-600/5 hover:border-brand-200 transition-all duration-300${animate ? ' animate-fade-in-up' : ''}`}
+      style={animate ? { animationDelay: `${index * 40}ms` } : undefined}
     >
       <Link to={`/catalog/${product.id}`} className="relative aspect-square overflow-hidden bg-slate-100">
         <ProductImage

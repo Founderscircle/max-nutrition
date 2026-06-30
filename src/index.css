@@ -58,14 +58,21 @@ body {
 }
 
 .glass {
-  @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-lg;
+  @apply bg-white/90 border border-white/40 shadow-lg;
+}
+
+@media (min-width: 768px) {
+  .glass {
+    @apply bg-white/80 backdrop-blur-md;
+  }
 }
 
 .cursor-glow-orb {
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+  transition: opacity 0.3s ease;
   will-change: transform;
   pointer-events: none;
   opacity: 0.45;
+  contain: layout style;
 }
 
 .cursor-glow-orb[data-mode='contrast'] {
