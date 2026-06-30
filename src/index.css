@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --color-brand-50: #f0fdfa;
+  --color-brand-100: #ccfbf1;
+  --color-brand-200: #99f6e4;
+  --color-brand-300: #5eead4;
+  --color-brand-400: #2dd4bf;
+  --color-brand-500: #14b8a6;
+  --color-brand-600: #0d9488;
+  --color-brand-700: #0f766e;
+  --color-brand-800: #115e59;
+  --color-brand-900: #134e4a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-slate-50 text-slate-800 font-sans antialiased;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-lg;
+}
+
+.cursor-glow-orb {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+  will-change: transform;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.cursor-glow-orb[data-mode='contrast'] {
+  opacity: 0.82;
+}
+
+/* Світлий фон — м'яке бірюзове світіння */
+.cursor-glow-orb[data-mode='default'] .cursor-glow-outer {
+  background: radial-gradient(
+    circle,
+    transparent 45%,
+    rgba(15, 118, 110, 0.06) 60%,
+    rgba(13, 148, 136, 0.1) 75%,
+    transparent 90%
+  );
+  box-shadow: 0 0 36px 8px rgba(13, 148, 136, 0.07);
+}
+
+.cursor-glow-orb[data-mode='default'] .cursor-glow-core {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(153, 246, 228, 0.16) 25%,
+    rgba(45, 212, 191, 0.09) 50%,
+    transparent 75%
+  );
+}
+
+.cursor-glow-orb[data-mode='default'] .cursor-glow-highlight {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(240, 253, 250, 0.18) 50%,
+    transparent 80%
+  );
+}
+
+/* Бірюзовий фон — біле/тепле світіння з темним кільцем */
+.cursor-glow-orb[data-mode='contrast'] .cursor-glow-outer {
+  background: radial-gradient(
+    circle,
+    transparent 38%,
+    rgba(255, 255, 255, 0.2) 52%,
+    rgba(255, 255, 255, 0.14) 68%,
+    transparent 88%
+  );
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.38),
+    0 0 48px 14px rgba(255, 255, 255, 0.2);
+}
+
+.cursor-glow-orb[data-mode='contrast'] .cursor-glow-core {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.5) 22%,
+    rgba(255, 255, 255, 0.22) 48%,
+    transparent 74%
+  );
+}
+
+.cursor-glow-orb[data-mode='contrast'] .cursor-glow-highlight {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.65) 38%,
+    transparent 72%
+  );
+  box-shadow: 0 0 28px 8px rgba(255, 255, 255, 0.5);
+}
+
+.cursor-glow-outer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cursor-glow-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: background 0.3s ease;
+}
+
+.cursor-glow-highlight {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gradient-hero {
+  background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 40%, #f0fdf4 100%);
+}
+
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(12px, -8px); }
+}
+
+.section-orb-drift {
+  animation: orb-drift 18s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-orb-drift {
+    animation: none;
+  }
+
+  .cursor-glow-outer,
+  .cursor-glow-core,
+  .cursor-glow-highlight {
+    opacity: 0;
+  }
+}
+
+.gradient-brand {
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg, #0d9488, #14b8a6);
+}

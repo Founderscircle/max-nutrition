@@ -1,0 +1,73 @@
+import { Link } from 'react-router-dom'
+import { Send, ArrowRight } from 'lucide-react'
+import type { Product } from '../data/products'
+import { categoryLabels } from '../data/products'
+import { getProductTelegramMessage, getTelegramLink } from '../config/site'
+import { ProductImage } from './ProductImage'
+
+interface ProductCardProps {
+  product: Product
+  index?: number
+}
+
+export function ProductCard({ product, index = 0 }: ProductCardProps) {
+  return (
+    <article
+      className="group flex flex-col overflow-hidden rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:shadow-brand-600/5 hover:border-brand-200 transition-all duration-300 animate-fade-in-up"
+      style={{ animationDelay: `${index * 60}ms` }}
+    >
+      <Link to={`/catalog/${product.id}`} className="relative aspect-square overflow-hidden bg-slate-100">
+        <ProductImage
+          src={product.image}
+          alt={product.name}
+          category={product.category}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute top-3 left-3">
+          <span className="rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-medium text-brand-700 shadow-sm">
+            {categoryLabels[product.category]}
+          </span>
+        </div>
+        {product.popular && (
+          <div className="absolute top-3 right-3">
+            <span className="rounded-full gradient-brand px-3 py-1 text-xs font-semibold text-white shadow-sm">
+              Популярне
+            </span>
+          </div>
+        )}
+      </Link>
+
+      <div className="flex flex-1 flex-col p-5">
+        <p className="text-xs text-slate-400 font-mono mb-1">{product.sku}</p>
+        <Link to={`/catalog/${product.id}`}>
+          <h3 className="font-semibold text-slate-900 group-hover:text-brand-700 transition-colors line-clamp-2">
+            {product.name}
+          </h3>
+        </Link>
+        <p className="mt-2 text-sm text-slate-500 line-clamp-2 flex-1">
+          {product.shortDescription}
+        </p>
+
+        <div className="mt-4 flex gap-2">
+          <Link
+            to={`/catalog/${product.id}`}
+            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+          >
+            Детальніше
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+          <a
+            href={getTelegramLink(getProductTelegramMessage(product.name, product.sku))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-1.5 rounded-xl gradient-brand px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:shadow-md transition-all"
+            title="Замовити консультацію через Telegram"
+          >
+            <Send className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Telegram</span>
+          </a>
+        </div>
+      </div>
+    </article>
+  )
+}
