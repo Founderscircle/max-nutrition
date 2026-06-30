@@ -21,17 +21,17 @@ const values = [
 
 export function AboutPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10 sm:px-6">
       <div className="max-w-3xl">
-        <h1 className="text-3xl font-bold text-slate-900">Про нас</h1>
-        <p className="mt-4 text-lg text-slate-600 leading-relaxed">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Про нас</h1>
+        <p className="mt-3 sm:mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
           Я — {siteConfig.distributor.names[0]}, незалежний дистриб'ютор
           Herbalife Nutrition в {siteConfig.distributor.city}, {siteConfig.distributor.country}.
         </p>
       </div>
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-2 items-center">
-        <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/3] bg-slate-100">
+      <div className="mt-10 sm:mt-12 grid gap-8 lg:grid-cols-2 items-center">
+        <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/3] bg-slate-100 max-h-[280px] sm:max-h-none">
           <img
             src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=600&fit=crop"
             alt="Здоровий спосіб життя"
@@ -56,9 +56,9 @@ export function AboutPage() {
       </div>
 
       <div className="mt-16">
-        <div className="flex items-center gap-2 mb-8">
-          <Users className="h-5 w-5 text-brand-600" />
-          <h2 className="text-2xl font-bold text-slate-900">Мої цінності</h2>
+        <div className="flex flex-wrap items-center gap-2 mb-6 sm:mb-8">
+          <Users className="h-5 w-5 text-brand-600 shrink-0" />
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Мої цінності</h2>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {values.map((v) => (
@@ -76,7 +76,7 @@ export function AboutPage() {
         </div>
       </div>
 
-      <div className="mt-16 rounded-2xl bg-slate-50 border border-slate-200 p-8">
+      <div className="mt-12 sm:mt-16 rounded-2xl bg-slate-50 border border-slate-200 p-5 sm:p-8">
         <h2 className="font-semibold text-slate-900 mb-4">Юридична інформація</h2>
         <ul className="space-y-2 text-sm text-slate-600">
           <li>• {siteConfig.legal.companyNote}</li>

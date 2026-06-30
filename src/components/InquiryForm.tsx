@@ -71,7 +71,7 @@ export function InquiryForm({
             <button
               type="button"
               onClick={() => setStatus('idle')}
-              className="mt-4 text-sm font-medium text-emerald-700 underline underline-offset-2"
+              className="mt-4 inline-flex items-center rounded-lg px-3 py-2 min-h-10 text-sm font-medium text-emerald-700 hover:bg-emerald-100 transition-colors"
             >
               Надіслати ще одну
             </button>
@@ -82,7 +82,7 @@ export function InquiryForm({
   }
 
   return (
-    <div className={`rounded-2xl bg-white border border-slate-200 ${compact ? 'p-5' : 'p-8'}`}>
+    <div className={`rounded-2xl bg-white border border-slate-200 ${compact ? 'p-4 sm:p-5' : 'p-5 sm:p-8'}`}>
       <div className="mb-6">
         <h2 className={`font-bold text-slate-900 ${compact ? 'text-lg' : 'text-xl'}`}>{title}</h2>
         <p className="mt-1 text-sm text-slate-500">{description}</p>
@@ -99,7 +99,7 @@ export function InquiryForm({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Олена"
-              className="mt-1.5 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
+              className="mt-1.5 w-full rounded-xl border border-slate-200 px-4 py-3 text-base sm:text-sm outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
             />
           </label>
           <label className="block">
@@ -111,7 +111,7 @@ export function InquiryForm({
               value={contact}
               onChange={(e) => setContact(e.target.value)}
               placeholder="+380... або @username"
-              className="mt-1.5 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
+              className="mt-1.5 w-full rounded-xl border border-slate-200 px-4 py-3 text-base sm:text-sm outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
             />
           </label>
         </div>
@@ -125,7 +125,7 @@ export function InquiryForm({
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Опишіть, що вас цікавить..."
-            className="mt-1.5 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none resize-y focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
+            className="mt-1.5 w-full rounded-xl border border-slate-200 px-4 py-3 text-base sm:text-sm outline-none resize-y focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
           />
         </label>
 
@@ -135,11 +135,11 @@ export function InquiryForm({
           </p>
         )}
 
-        <div className="flex flex-col sm:flex-row gap-3 pt-1">
+        <div className="flex flex-col gap-3 pt-1">
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="inline-flex items-center justify-center gap-2 rounded-xl gradient-brand px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-600/20 hover:shadow-xl disabled:opacity-70 transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl gradient-brand px-6 py-3.5 min-h-11 text-sm font-semibold text-white shadow-lg shadow-brand-600/20 hover:shadow-xl disabled:opacity-70 transition-all"
           >
             {status === 'loading' ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -152,9 +152,9 @@ export function InquiryForm({
             href={getTelegramLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-6 py-3.5 text-sm font-semibold text-slate-700 hover:border-brand-200 transition-colors"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-6 py-3.5 min-h-11 text-sm font-semibold text-slate-700 hover:border-brand-200 transition-colors"
           >
-            Або {siteConfig.telegram.displayName}
+            <span className="truncate">Або {siteConfig.telegram.displayName}</span>
           </a>
         </div>
       </form>

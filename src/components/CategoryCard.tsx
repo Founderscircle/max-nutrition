@@ -22,7 +22,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
   return (
     <Link
       to={`/catalog?category=${category}`}
-      className="group flex items-center gap-4 rounded-2xl bg-white border border-slate-200/80 p-5 shadow-sm hover:shadow-lg hover:border-brand-200 transition-all duration-300"
+      className="group flex items-center gap-3 sm:gap-4 rounded-2xl bg-white border border-slate-200/80 p-4 sm:p-5 shadow-sm hover:shadow-lg hover:border-brand-200 transition-all duration-300"
     >
       <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-50 text-2xl group-hover:scale-110 transition-transform">
         {categoryIcons[category]}
@@ -43,10 +43,10 @@ export function CategoryGrid() {
 
   return (
     <section>
-      <div className="flex items-center gap-2 mb-6">
-        <Layers className="h-5 w-5 text-brand-600" />
-        <h2 className="text-2xl font-bold text-slate-900">Категорії продукції</h2>
-        <span className="ml-auto text-sm text-slate-400">{categories.length} категорій</span>
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-6">
+        <Layers className="h-5 w-5 text-brand-600 shrink-0" />
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Категорії продукції</h2>
+        <span className="w-full sm:w-auto sm:ml-auto text-sm text-slate-400">{categories.length} категорій</span>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {categories.map((cat) => (

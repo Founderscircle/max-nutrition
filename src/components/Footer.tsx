@@ -4,9 +4,9 @@ import { siteConfig, getTelegramLink } from '../config/site'
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-white mt-auto">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="grid gap-8 md:grid-cols-3">
+    <footer className="border-t border-slate-200 bg-white mt-auto safe-bottom">
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:py-12 sm:px-6">
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-brand">
@@ -41,7 +41,7 @@ export function Footer() {
               <Send className="h-4 w-4" />
               {siteConfig.telegram.displayName}
             </a>
-            <p className="text-sm text-slate-500">{siteConfig.distributor.email}</p>
+            <p className="text-sm text-slate-500 mt-1 break-all">{siteConfig.distributor.email}</p>
             <p className="text-sm text-slate-500 mt-1">{siteConfig.distributor.city}, {siteConfig.distributor.country}</p>
           </div>
         </div>

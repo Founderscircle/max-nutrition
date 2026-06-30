@@ -41,27 +41,27 @@ export function HomePage() {
         <SectionOrb variant="aqua" size="md" className="bottom-10 -left-16 hidden sm:block" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(20,184,166,0.12),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(45,212,191,0.08),transparent_50%)]" />
-        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="animate-fade-in-up">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-100 px-4 py-1.5 text-sm font-medium text-brand-700 mb-6">
-                <CheckCircle2 className="h-4 w-4" />
+        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-24">
+          <div className="grid gap-8 lg:gap-12 lg:grid-cols-2 lg:items-center">
+            <div className="animate-fade-in-up order-2 lg:order-1">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-100 px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium text-brand-700 mb-4 sm:mb-6">
+                <CheckCircle2 className="h-4 w-4 shrink-0" />
                 Незалежний дистриб'ютор · Україна
               </span>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight">
                 Продукція{' '}
                 <span className="text-gradient">Herbalife</span>
                 <br />
                 для здорового життя
               </h1>
-              <p className="mt-6 text-lg text-slate-600 leading-relaxed max-w-lg">
+              <p className="mt-4 sm:mt-6 text-base sm:text-lg text-slate-600 leading-relaxed max-w-lg">
                 Ознайомтесь з асортиментом продукції Herbalife Nutrition.
                 Отримайте персональну консультацію та оформіть замовлення через Telegram.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link
                   to="/catalog"
-                  className="inline-flex items-center gap-2 rounded-xl gradient-brand px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl gradient-brand px-6 py-3.5 min-h-11 text-base font-semibold text-white shadow-lg shadow-brand-600/25 hover:shadow-xl hover:-translate-y-0.5 transition-all"
                 >
                   Переглянути каталог
                   <ArrowRight className="h-5 w-5" />
@@ -70,15 +70,15 @@ export function HomePage() {
                   href={getTelegramLink('Вітаю! Хочу отримати консультацію щодо продукції Herbalife.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl bg-white border border-slate-200 px-6 py-3.5 text-base font-semibold text-slate-700 shadow-sm hover:shadow-md hover:border-brand-200 transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-slate-200 px-6 py-3.5 min-h-11 text-base font-semibold text-slate-700 shadow-sm hover:shadow-md hover:border-brand-200 transition-all"
                 >
-                  <Send className="h-5 w-5 text-brand-600" />
-                  Консультація в Telegram
+                  <Send className="h-5 w-5 text-brand-600 shrink-0" />
+                  <span className="truncate">Консультація в Telegram</span>
                 </a>
               </div>
             </div>
 
-            <div className="animate-fade-in-up" style={{ animationDelay: '150ms' }}>
+            <div className="animate-fade-in-up order-1 lg:order-2" style={{ animationDelay: '150ms' }}>
               <HeroVisual />
             </div>
           </div>
@@ -87,7 +87,7 @@ export function HomePage() {
 
       <SiteStatsBar />
 
-      <section className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section className="relative mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
         <div className="grid gap-6 md:grid-cols-3">
           {features.map((f) => (
             <div
@@ -104,17 +104,17 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section className="relative mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
         <CategoryGrid />
       </section>
 
       <section className="relative bg-white/80 backdrop-blur-sm border-y border-slate-200/80">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-slate-900">Зараз цікавлять</h2>
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 sm:mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Зараз цікавлять</h2>
             <Link
               to="/catalog"
-              className="text-sm font-medium text-brand-600 hover:text-brand-700 flex items-center gap-1"
+              className="text-sm font-medium text-brand-600 hover:text-brand-700 flex items-center gap-1 shrink-0"
             >
               Увесь каталог <ArrowRight className="h-4 w-4" />
             </Link>
@@ -127,30 +127,30 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div className="rounded-3xl gradient-brand p-8 sm:p-12 text-center text-white relative overflow-hidden">
+      <section className="relative mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
+        <div className="rounded-2xl sm:rounded-3xl gradient-brand p-6 sm:p-12 text-center text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.15),transparent_50%)]" />
           <div className="relative">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+            <h2 className="text-xl sm:text-3xl font-bold mb-3 sm:mb-4">
               Потрібна консультація?
             </h2>
-            <p className="text-brand-100 max-w-xl mx-auto mb-8">
+            <p className="text-brand-100 text-sm sm:text-base max-w-xl mx-auto mb-6 sm:mb-8">
               Консультант {siteConfig.distributor.names[0]} допоможе підібрати
               продукцію та оформити замовлення. Напишіть у Telegram або залиште заявку на сторінці контактів.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
             <a
               href={getTelegramLink('Вітаю! Хочу отримати консультацію та дізнатися про умови замовлення.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-bold text-brand-700 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 sm:px-8 py-3.5 sm:py-4 min-h-11 text-sm sm:text-base font-bold text-brand-700 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
             >
-              <Send className="h-5 w-5" />
-              Написати в {siteConfig.telegram.displayName}
+              <Send className="h-5 w-5 shrink-0" />
+              <span className="truncate">Telegram</span>
             </a>
             <Link
               to="/contact#form"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-8 py-4 text-base font-bold text-white hover:bg-white/20 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-6 sm:px-8 py-3.5 sm:py-4 min-h-11 text-sm sm:text-base font-bold text-white hover:bg-white/20 transition-all"
             >
               Залишити заявку
             </Link>

@@ -37,10 +37,10 @@ const contactMethods = [
 
 export function ContactPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <div className="max-w-3xl mb-12">
-        <h1 className="text-3xl font-bold text-slate-900">Контакти</h1>
-        <p className="mt-4 text-slate-600 leading-relaxed">
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10 sm:px-6">
+      <div className="max-w-3xl mb-8 sm:mb-12">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Контакти</h1>
+        <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">
           Зв'яжіться з нами для отримання консультації щодо продукції Herbalife.
           Замовлення приймаються виключно через Telegram після особистої консультації.
         </p>
@@ -50,7 +50,7 @@ export function ContactPage() {
         {contactMethods.map((method) => (
           <div
             key={method.title}
-            className={`rounded-2xl p-6 border transition-shadow hover:shadow-md ${
+            className={`rounded-2xl p-5 sm:p-6 border transition-shadow hover:shadow-md ${
               method.primary
                 ? 'gradient-brand text-white border-transparent shadow-lg shadow-brand-600/20'
                 : 'bg-white border-slate-200'
@@ -64,7 +64,7 @@ export function ContactPage() {
               >
                 <method.icon className={`h-6 w-6 ${method.primary ? 'text-white' : 'text-brand-600'}`} />
               </div>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <h3 className={`font-semibold ${method.primary ? 'text-white' : 'text-slate-900'}`}>
                   {method.title}
                 </h3>
@@ -76,7 +76,7 @@ export function ContactPage() {
                     href={method.href}
                     target={method.href.startsWith('http') ? '_blank' : undefined}
                     rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className={`inline-block mt-2 font-medium ${
+                    className={`inline-block mt-2 font-medium break-all ${
                       method.primary
                         ? 'text-white underline underline-offset-2'
                         : 'text-brand-600 hover:text-brand-700'
@@ -95,17 +95,17 @@ export function ContactPage() {
         ))}
       </div>
 
-      <div id="form" className="mt-12 scroll-mt-24">
+      <div id="form" className="mt-10 sm:mt-12 scroll-mt-28 sm:scroll-mt-24">
         <InquiryForm
           title="Залишити заявку на консультацію"
           description="Заповніть форму — заявка одразу надійде консультанту. Відповімо протягом 1–2 годин."
         />
       </div>
 
-      <div className="mt-12 rounded-2xl bg-white border border-slate-200 p-8">
-        <div className="flex items-center gap-3 mb-4">
-          <MessageSquare className="h-6 w-6 text-brand-600" />
-          <h2 className="text-xl font-bold text-slate-900">Як оформити замовлення?</h2>
+      <div className="mt-10 sm:mt-12 rounded-2xl bg-white border border-slate-200 p-5 sm:p-8">
+        <div className="flex items-start sm:items-center gap-3 mb-4">
+          <MessageSquare className="h-6 w-6 text-brand-600 shrink-0" />
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900">Як оформити замовлення?</h2>
         </div>
         <ol className="space-y-4">
           {[

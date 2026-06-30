@@ -12,7 +12,7 @@ export function HeroVisual() {
         <img
           src="/images/ronaldo-cr7-drive.png"
           alt="Кріштіану Роналду з напоєм CR7 Drive від Herbalife Nutrition"
-          className="aspect-[4/5] w-full object-cover object-top sm:aspect-[5/6]"
+          className="aspect-[3/4] w-full object-cover object-top sm:aspect-[4/5] lg:aspect-[5/6]"
           loading="eager"
           fetchPriority="high"
         />

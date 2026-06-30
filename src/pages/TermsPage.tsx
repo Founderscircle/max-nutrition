@@ -2,8 +2,8 @@ import { siteConfig } from '../config/site'
 
 export function TermsPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <h1 className="text-3xl font-bold text-slate-900">Умови використання</h1>
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:py-10 sm:px-6">
+      <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Умови використання</h1>
       <p className="mt-2 text-sm text-slate-500">Останнє оновлення: {new Date().toLocaleDateString('uk-UA')}</p>
 
       <div className="mt-8 space-y-6 text-slate-600 leading-relaxed text-sm">
