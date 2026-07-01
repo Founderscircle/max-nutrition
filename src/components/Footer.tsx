@@ -23,7 +23,7 @@ export function Footer() {
             <h3 className="font-semibold text-slate-900 mb-3">Навігація</h3>
             <ul className="space-y-2 text-sm">
               <li><Link to="/catalog" className="text-slate-500 hover:text-brand-600 transition-colors">Каталог</Link></li>
-              <li><Link to="/about" className="text-slate-500 hover:text-brand-600 transition-colors">Про нас</Link></li>
+              <li><Link to="/about" className="text-slate-500 hover:text-brand-600 transition-colors">Про мене</Link></li>
               <li><Link to="/contact" className="text-slate-500 hover:text-brand-600 transition-colors">Контакти</Link></li>
               <li><Link to="/privacy" className="text-slate-500 hover:text-brand-600 transition-colors">Політика конфіденційності</Link></li>
               <li><Link to="/terms" className="text-slate-500 hover:text-brand-600 transition-colors">Умови використання</Link></li>

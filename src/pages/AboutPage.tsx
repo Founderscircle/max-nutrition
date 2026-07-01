@@ -10,12 +10,12 @@ const values = [
   {
     icon: Target,
     title: 'Професійний підхід',
-    text: 'Надаємо детальні консультації щодо продукції, способу застосування та програм харчування.',
+    text: 'Надаю детальні консультації щодо продукції, способу застосування та програм харчування.',
   },
   {
     icon: Award,
     title: 'Якість Herbalife',
-    text: 'Працюємо виключно з оригінальною продукцією Herbalife Nutrition через офіційні канали дистрибуції.',
+    text: 'Працюю виключно з оригінальною продукцією Herbalife Nutrition через офіційні канали дистрибуції.',
   },
 ]
 
@@ -23,7 +23,7 @@ export function AboutPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10 sm:px-6">
       <div className="max-w-3xl">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Про нас</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Про мене</h1>
         <p className="mt-3 sm:mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
           Я — {siteConfig.distributor.names[0]}, незалежний дистриб'ютор
           Herbalife Nutrition в {siteConfig.distributor.city}, {siteConfig.distributor.country}.
@@ -82,7 +82,7 @@ export function AboutPage() {
           <li>• {siteConfig.legal.companyNote}</li>
           <li>• {siteConfig.legal.noPricesNote}</li>
           <li>• {siteConfig.legal.orderNote}</li>
-          <li>• Ми не робимо медичних заяв та не обіцяємо конкретних результатів.</li>
+          <li>• Я не роблю медичних заяв та не обіцяю конкретних результатів.</li>
           <li>• Торгова марка Herbalife належить Herbalife International of America, Inc.</li>
         </ul>
       </div>

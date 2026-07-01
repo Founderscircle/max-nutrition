@@ -6,7 +6,7 @@ import { siteConfig, getTelegramLink } from '../config/site'
 const navLinks = [
   { to: '/', label: 'Головна' },
   { to: '/catalog', label: 'Каталог' },
-  { to: '/about', label: 'Про нас' },
+  { to: '/about', label: 'Про мене' },
   { to: '/contact', label: 'Контакти' },
 ]
 
