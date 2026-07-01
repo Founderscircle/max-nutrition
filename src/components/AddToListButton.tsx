@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Check, ListPlus } from 'lucide-react'
+import { Check, ShoppingCart } from 'lucide-react'
 import { useInterestList } from '../context/InterestListContext'
 
 interface AddToListButtonProps {
@@ -49,8 +49,8 @@ export function AddToListButton({
         </>
       ) : (
         <>
-          <ListPlus className="h-3.5 w-3.5 shrink-0" />
-          <span className="truncate">До списку</span>
+          <ShoppingCart className="h-3.5 w-3.5 shrink-0" />
+          <span className="truncate">В кошик</span>
         </>
       )}
     </button>

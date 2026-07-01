@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Leaf, Send, ClipboardList } from 'lucide-react'
+import { Menu, X, Leaf, Send, ShoppingCart } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { siteConfig, getTelegramLink } from '../config/site'
 import { useInterestList } from '../context/InterestListContext'
@@ -76,10 +76,10 @@ export function Header() {
                 ? 'bg-brand-50 text-brand-700'
                 : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
             }`}
-            aria-label="Мій список"
-            title="Мій список"
+            aria-label="Кошик"
+            title="Кошик"
           >
-            <ClipboardList className="h-5 w-5" />
+            <ShoppingCart className="h-5 w-5" />
             {totalCount > 0 && (
               <span className="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full gradient-brand px-1 text-[10px] font-bold text-white">
                 {totalCount > 99 ? '99+' : totalCount}
@@ -105,9 +105,9 @@ export function Header() {
                 ? 'bg-brand-50 text-brand-700'
                 : 'text-slate-600 hover:bg-slate-100'
             }`}
-            aria-label="Мій список"
+            aria-label="Кошик"
           >
-            <ClipboardList className="h-5 w-5" />
+            <ShoppingCart className="h-5 w-5" />
             {totalCount > 0 && (
               <span className="absolute top-1 right-1 flex h-4 min-w-4 items-center justify-center rounded-full gradient-brand px-0.5 text-[9px] font-bold text-white">
                 {totalCount > 99 ? '99+' : totalCount}
@@ -151,7 +151,7 @@ export function Header() {
                 : 'text-slate-600'
             }`}
           >
-            Мій список
+            Кошик
             {totalCount > 0 && (
               <span className="rounded-full gradient-brand px-2.5 py-0.5 text-xs font-bold text-white">
                 {totalCount}

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Send, Trash2, ShoppingBag, ArrowRight } from 'lucide-react'
+import { Send, Trash2, ShoppingCart, ArrowRight } from 'lucide-react'
 import { useInterestList } from '../context/InterestListContext'
 import { ProductImage } from '../components/ProductImage'
 import { QuantityPicker } from '../components/QuantityPicker'
@@ -14,11 +14,11 @@ export function InterestListPage() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-16 sm:py-24 sm:px-6 text-center">
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
-          <ShoppingBag className="h-8 w-8" />
+          <ShoppingCart className="h-8 w-8" />
         </div>
-        <h1 className="mt-6 text-2xl sm:text-3xl font-bold text-slate-900">Ваш список порожній</h1>
+        <h1 className="mt-6 text-2xl sm:text-3xl font-bold text-slate-900">Кошик порожній</h1>
         <p className="mt-3 text-slate-600">
-          Додайте продукти, які вас цікавлять, і надішліть список консультанту в Telegram для
+          Додайте продукти, які вас цікавлять, і надішліть кошик консультанту в Telegram для
           консультації та узгодження замовлення.
         </p>
         <Link
@@ -36,10 +36,10 @@ export function InterestListPage() {
     <div className="mx-auto max-w-3xl px-4 py-8 sm:py-10 sm:px-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Мій список</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Кошик</h1>
           <p className="mt-2 text-slate-600">
             {totalCount} {totalCount === 1 ? 'позиція' : totalCount < 5 ? 'позиції' : 'позицій'} ·
-            надішліть список для консультації в Telegram
+            надішліть кошик для консультації в Telegram
           </p>
         </div>
         <button
@@ -47,7 +47,7 @@ export function InterestListPage() {
           onClick={clearList}
           className="self-start text-sm text-slate-500 hover:text-red-600 transition-colors"
         >
-          Очистити список
+          Очистити кошик
         </button>
       </div>
 
@@ -109,7 +109,7 @@ export function InterestListPage() {
       </ul>
 
       <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
-        <h2 className="font-semibold text-slate-900">Надіслати список</h2>
+        <h2 className="font-semibold text-slate-900">Надіслати з кошика</h2>
         <p className="mt-2 text-sm text-slate-600">
           Відкриється Telegram з готовим повідомленням. Консультант отримає перелік продуктів і
           кількість, після чого зв'яжеться з вами для узгодження деталей.
@@ -137,7 +137,7 @@ export function InterestListPage() {
           listItems={items}
           hideTelegramLink
           title="Або залишити контакт"
-          description="Консультант отримає ваш список і зв'яжеться з вами — навіть якщо ви не відкрили Telegram."
+          description="Консультант отримає ваш кошик і зв'яжеться з вами — навіть якщо ви не відкрили Telegram."
           onSuccess={clearList}
         />
       </div>
