@@ -18,8 +18,8 @@ export function InterestListPage() {
         </div>
         <h1 className="mt-6 text-2xl sm:text-3xl font-bold text-slate-900">Кошик порожній</h1>
         <p className="mt-3 text-slate-600">
-          Додайте продукти, які вас цікавлять, і надішліть кошик консультанту в Telegram для
-          консультації та узгодження замовлення.
+          {siteConfig.legal.cartPromoNote} Додайте продукти з каталогу та надішліть кошик для
+          узгодження замовлення.
         </p>
         <Link
           to="/catalog"
@@ -51,8 +51,9 @@ export function InterestListPage() {
         </button>
       </div>
 
-      <div className="mt-8 rounded-2xl border border-brand-100 bg-brand-50 p-4 text-sm text-brand-800">
-        {siteConfig.legal.orderNote} Ціни та умови замовлення узгоджуються під час консультації.
+      <div className="mt-8 rounded-2xl border border-brand-100 bg-brand-50 p-4 text-sm text-brand-800 leading-relaxed">
+        {siteConfig.legal.cartPromoNote} {siteConfig.legal.orderNote} Ціни та умови замовлення
+        узгоджуються під час консультації.
       </div>
 
       <ul className="mt-6 space-y-3">
