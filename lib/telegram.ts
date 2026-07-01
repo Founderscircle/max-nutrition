@@ -29,17 +29,25 @@ export async function sendTelegramMessage(html: string): Promise<boolean> {
 }
 
 export function formatInquiryMessage(payload: {
-  type: 'contact' | 'product'
+  type: 'contact' | 'product' | 'list'
   name: string
   contact: string
   message: string
   productName?: string
   productSku?: string
+  listItems?: Array<{
+    name: string
+    sku: string
+    flavorLabel?: string
+    quantity: number
+  }>
 }): string {
   const title =
-    payload.type === 'product'
-      ? '🛒 <b>Запит щодо продукту</b>'
-      : '💬 <b>Нова заявка з сайту</b>'
+    payload.type === 'list'
+      ? '🛍️ <b>Запит зі списку продуктів</b>'
+      : payload.type === 'product'
+        ? '🛒 <b>Запит щодо продукту</b>'
+        : '💬 <b>Нова заявка з сайту</b>'
 
   const lines = [
     title,
@@ -48,14 +56,25 @@ export function formatInquiryMessage(payload: {
     `<b>Контакт:</b> ${escapeHtml(payload.contact)}`,
   ]
 
-  if (payload.productName) {
-    lines.push(`<b>Продукт:</b> ${escapeHtml(payload.productName)}`)
-  }
-  if (payload.productSku) {
-    lines.push(`<b>Артикул:</b> ${escapeHtml(payload.productSku)}`)
+  if (payload.type === 'list' && payload.listItems?.length) {
+    lines.push('', '<b>Список:</b>')
+    payload.listItems.forEach((item, index) => {
+      const flavorPart = item.flavorLabel ? `, смак: ${escapeHtml(item.flavorLabel)}` : ''
+      const qtyPart = item.quantity > 1 ? ` × ${item.quantity}` : ''
+      lines.push(
+        `${index + 1}. ${escapeHtml(item.name)}${flavorPart} (${escapeHtml(item.sku)})${qtyPart}`,
+      )
+    })
+  } else {
+    if (payload.productName) {
+      lines.push(`<b>Продукт:</b> ${escapeHtml(payload.productName)}`)
+    }
+    if (payload.productSku) {
+      lines.push(`<b>Артикул:</b> ${escapeHtml(payload.productSku)}`)
+    }
+    lines.push('', `<b>Повідомлення:</b>`, escapeHtml(payload.message))
   }
 
-  lines.push('', `<b>Повідомлення:</b>`, escapeHtml(payload.message))
   lines.push('', `<i>Max Nutrition · max-nutrition.net.ua</i>`)
 
   return lines.join('\n')

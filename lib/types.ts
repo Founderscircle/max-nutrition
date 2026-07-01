@@ -21,14 +21,22 @@ export interface SiteStats {
   updatedAt: string
 }
 
+export interface InquiryListItem {
+  name: string
+  sku: string
+  flavorLabel?: string
+  quantity: number
+}
+
 export interface InquiryPayload {
-  type: 'contact' | 'product'
+  type: 'contact' | 'product' | 'list'
   name: string
   contact: string
   message: string
   productId?: string
   productName?: string
   productSku?: string
+  listItems?: InquiryListItem[]
 }
 
 export interface TrackPayload {

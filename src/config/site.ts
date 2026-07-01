@@ -32,6 +32,34 @@ export function getTelegramLink(message?: string): string {
   return `${base}?text=${encodeURIComponent(message)}`
 }
 
-export function getProductTelegramMessage(productName: string, sku: string): string {
-  return `Вітаю! Цікавить продукт: ${productName} (${sku}). Будь ласка, надайте консультацію щодо наявності та умов замовлення.`
+export function getProductTelegramMessage(
+  productName: string,
+  sku: string,
+  flavor?: string,
+): string {
+  const flavorPart = flavor ? `, смак: ${flavor}` : ''
+  return `Вітаю! Цікавить продукт: ${productName}${flavorPart} (${sku}). Будь ласка, надайте консультацію щодо наявності та умов замовлення.`
+}
+
+export interface InterestListTelegramItem {
+  name: string
+  sku: string
+  flavorLabel?: string
+  quantity: number
+}
+
+export function getInterestListTelegramMessage(items: InterestListTelegramItem[]): string {
+  const lines = items.map((item, index) => {
+    const flavorPart = item.flavorLabel ? `, смак: ${item.flavorLabel}` : ''
+    const qtyPart = item.quantity > 1 ? ` × ${item.quantity}` : ''
+    return `${index + 1}. ${item.name}${flavorPart} (${item.sku})${qtyPart}`
+  })
+
+  return [
+    'Вітаю! Мене цікавить такий список продукції:',
+    '',
+    ...lines,
+    '',
+    'Будь ласка, надайте консультацію щодо наявності та умов замовлення.',
+  ].join('\n')
 }

@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Leaf, Send } from 'lucide-react'
+import { Menu, X, Leaf, Send, ClipboardList } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { siteConfig, getTelegramLink } from '../config/site'
+import { useInterestList } from '../context/InterestListContext'
 
 const navLinks = [
   { to: '/', label: 'Головна' },
@@ -13,6 +14,7 @@ const navLinks = [
 export function Header() {
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const { totalCount } = useInterestList()
 
   useEffect(() => {
     setOpen(false)
@@ -67,6 +69,23 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          <Link
+            to="/list"
+            className={`relative rounded-lg p-2.5 transition-colors ${
+              location.pathname === '/list'
+                ? 'bg-brand-50 text-brand-700'
+                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+            }`}
+            aria-label="Мій список"
+            title="Мій список"
+          >
+            <ClipboardList className="h-5 w-5" />
+            {totalCount > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full gradient-brand px-1 text-[10px] font-bold text-white">
+                {totalCount > 99 ? '99+' : totalCount}
+              </span>
+            )}
+          </Link>
           <a
             href={getTelegramLink('Вітаю! Хочу отримати консультацію щодо продукції Herbalife.')}
             target="_blank"
@@ -78,15 +97,33 @@ export function Header() {
           </a>
         </nav>
 
-        <button
-          type="button"
-          className="md:hidden flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100"
-          onClick={() => setOpen(!open)}
-          aria-label="Меню"
-          aria-expanded={open}
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <Link
+            to="/list"
+            className={`relative flex h-11 w-11 items-center justify-center rounded-xl transition-colors ${
+              location.pathname === '/list'
+                ? 'bg-brand-50 text-brand-700'
+                : 'text-slate-600 hover:bg-slate-100'
+            }`}
+            aria-label="Мій список"
+          >
+            <ClipboardList className="h-5 w-5" />
+            {totalCount > 0 && (
+              <span className="absolute top-1 right-1 flex h-4 min-w-4 items-center justify-center rounded-full gradient-brand px-0.5 text-[9px] font-bold text-white">
+                {totalCount > 99 ? '99+' : totalCount}
+              </span>
+            )}
+          </Link>
+          <button
+            type="button"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100"
+            onClick={() => setOpen(!open)}
+            aria-label="Меню"
+            aria-expanded={open}
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -105,6 +142,22 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          <Link
+            to="/list"
+            onClick={() => setOpen(false)}
+            className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-medium min-h-11 ${
+              location.pathname === '/list'
+                ? 'bg-brand-50 text-brand-700'
+                : 'text-slate-600'
+            }`}
+          >
+            Мій список
+            {totalCount > 0 && (
+              <span className="rounded-full gradient-brand px-2.5 py-0.5 text-xs font-bold text-white">
+                {totalCount}
+              </span>
+            )}
+          </Link>
           <a
             href={getTelegramLink()}
             target="_blank"

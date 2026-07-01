@@ -10,6 +10,12 @@ export type ProductCategory =
   | 'sports'
   | 'accessories'
 
+export interface ProductFlavor {
+  label: string
+  sku: string
+  image?: string
+}
+
 export interface Product {
   id: string
   sku: string
@@ -21,6 +27,7 @@ export interface Product {
   ingredients?: string
   usage: string
   image: string
+  flavors?: ProductFlavor[]
   popular?: boolean
 }
 

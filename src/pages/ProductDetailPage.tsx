@@ -1,18 +1,36 @@
+import { useState, useEffect } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { Send, ArrowLeft, Check, Info } from 'lucide-react'
 import { getProductById, categoryLabels } from '../data/products'
 import { getProductTelegramMessage, getTelegramLink, siteConfig } from '../config/site'
 import { ProductImage } from '../components/ProductImage'
+import { FlavorPicker } from '../components/FlavorPicker'
+import { QuantityPicker } from '../components/QuantityPicker'
+import { AddToListButton } from '../components/AddToListButton'
 import { InquiryForm } from '../components/InquiryForm'
 import { useProductTracking } from '../hooks/usePageTracking'
 
 export function ProductDetailPage() {
   const { id } = useParams<{ id: string }>()
   const product = id ? getProductById(id) : undefined
+  const defaultFlavor =
+    product?.flavors?.find((f) => f.sku === product.sku) ?? product?.flavors?.[0]
+  const [selectedFlavor, setSelectedFlavor] = useState(defaultFlavor)
+  const [quantity, setQuantity] = useState(1)
+
+  useEffect(() => {
+    setSelectedFlavor(
+      product?.flavors?.find((f) => f.sku === product.sku) ?? product?.flavors?.[0],
+    )
+    setQuantity(1)
+  }, [product?.id, product?.flavors, product?.sku])
 
   useProductTracking(product?.id)
 
   if (!product) return <Navigate to="/catalog" replace />
+
+  const activeSku = selectedFlavor?.sku ?? product.sku
+  const activeImage = selectedFlavor?.image || product.image
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10 sm:px-6">
@@ -27,7 +45,7 @@ export function ProductDetailPage() {
       <div className="grid gap-8 lg:gap-10 lg:grid-cols-2">
         <div className="relative aspect-square max-h-[70vh] sm:max-h-none mx-auto w-full lg:mx-0 rounded-2xl overflow-hidden bg-slate-100 shadow-lg">
           <ProductImage
-            src={product.image}
+            src={activeImage}
             alt={product.name}
             category={product.category}
             className="h-full w-full object-cover"
@@ -45,9 +63,34 @@ export function ProductDetailPage() {
         </div>
 
         <div className="min-w-0">
-          <p className="text-sm text-slate-400 font-mono break-all">{product.sku}</p>
+          <p className="text-sm text-slate-400 font-mono break-all">{activeSku}</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1 break-words">{product.name}</h1>
           <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">{product.description}</p>
+
+          {product.flavors && product.flavors.length > 1 && (
+            <FlavorPicker
+              flavors={product.flavors}
+              selectedSku={activeSku}
+              onSelect={setSelectedFlavor}
+            />
+          )}
+
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <div>
+              <p className="text-sm font-medium text-slate-700 mb-2">Кількість</p>
+              <QuantityPicker value={quantity} onChange={setQuantity} />
+            </div>
+            <div className="pt-6">
+              <AddToListButton
+                productId={product.id}
+                name={product.name}
+                sku={activeSku}
+                flavorLabel={selectedFlavor?.label}
+                image={activeImage}
+                quantity={quantity}
+              />
+            </div>
+          </div>
 
           <div className="mt-6 rounded-xl bg-brand-50 border border-brand-100 p-4 flex gap-3">
             <Info className="h-5 w-5 text-brand-600 shrink-0 mt-0.5" />
@@ -58,7 +101,9 @@ export function ProductDetailPage() {
           </div>
 
           <a
-            href={getTelegramLink(getProductTelegramMessage(product.name, product.sku))}
+            href={getTelegramLink(
+              getProductTelegramMessage(product.name, activeSku, selectedFlavor?.label),
+            )}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-xl gradient-brand px-6 sm:px-8 py-3.5 sm:py-4 min-h-11 text-sm sm:text-base font-bold text-white shadow-lg shadow-brand-600/25 hover:shadow-xl hover:-translate-y-0.5 transition-all"
@@ -72,7 +117,8 @@ export function ProductDetailPage() {
               type="product"
               productId={product.id}
               productName={product.name}
-              productSku={product.sku}
+              productSku={activeSku}
+              productFlavor={selectedFlavor?.label}
               compact
               title="Або залишити заявку"
               description="Консультант отримає запит і зв'яжеться з вами."

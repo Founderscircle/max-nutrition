@@ -1,16 +1,20 @@
 import { useState, type FormEvent } from 'react'
 import { Send, Loader2, CheckCircle2 } from 'lucide-react'
-import { submitInquiry, type InquiryFormData } from '../lib/api'
-import { getTelegramLink, siteConfig } from '../config/site'
+import { submitInquiry, type InquiryFormData, type InquiryListItem } from '../lib/api'
+import { getInterestListTelegramMessage, getTelegramLink, siteConfig } from '../config/site'
 
 interface InquiryFormProps {
-  type?: 'contact' | 'product'
+  type?: 'contact' | 'product' | 'list'
   productId?: string
   productName?: string
   productSku?: string
+  productFlavor?: string
+  listItems?: InquiryListItem[]
   title?: string
   description?: string
   compact?: boolean
+  hideTelegramLink?: boolean
+  onSuccess?: () => void
 }
 
 export function InquiryForm({
@@ -18,19 +22,29 @@ export function InquiryForm({
   productId,
   productName,
   productSku,
+  productFlavor,
+  listItems,
   title = 'Залишити заявку',
   description = 'Заповніть форму — консультант зв\'яжеться з вами найближчим часом.',
   compact = false,
+  hideTelegramLink = false,
+  onSuccess,
 }: InquiryFormProps) {
   const [name, setName] = useState('')
   const [contact, setContact] = useState('')
-  const [message, setMessage] = useState(
-    type === 'product' && productName
-      ? `Цікавить продукт: ${productName}${productSku ? ` (${productSku})` : ''}.`
-      : '',
-  )
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [feedback, setFeedback] = useState('')
+
+  function buildMessage(): string {
+    if (type === 'list' && listItems?.length) {
+      return getInterestListTelegramMessage(listItems)
+    }
+    if (type === 'product' && productName) {
+      const flavorPart = productFlavor ? `, смак: ${productFlavor}` : ''
+      return `Цікавить продукт: ${productName}${flavorPart}${productSku ? ` (${productSku})` : ''}.`
+    }
+    return 'Прошу зв\'язатися зі мною для консультації.'
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -41,10 +55,11 @@ export function InquiryForm({
       type,
       name: name.trim(),
       contact: contact.trim(),
-      message: message.trim(),
+      message: buildMessage(),
       productId,
       productName,
       productSku,
+      listItems: type === 'list' ? listItems : undefined,
     }
 
     try {
@@ -53,7 +68,7 @@ export function InquiryForm({
       setFeedback(result)
       setName('')
       setContact('')
-      if (type === 'contact') setMessage('')
+      onSuccess?.()
     } catch (error) {
       setStatus('error')
       setFeedback(error instanceof Error ? error.message : 'Не вдалося надіслати заявку')
@@ -116,19 +131,6 @@ export function InquiryForm({
           </label>
         </div>
 
-        <label className="block">
-          <span className="text-sm font-medium text-slate-700">Повідомлення</span>
-          <textarea
-            required
-            minLength={5}
-            rows={compact ? 3 : 4}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Опишіть, що вас цікавить..."
-            className="mt-1.5 w-full rounded-xl border border-slate-200 px-4 py-3 text-base sm:text-sm outline-none resize-y focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
-          />
-        </label>
-
         {status === 'error' && (
           <p className="text-sm text-red-600 rounded-lg bg-red-50 border border-red-100 px-4 py-3">
             {feedback}
@@ -148,14 +150,16 @@ export function InquiryForm({
             )}
             Надіслати заявку
           </button>
-          <a
-            href={getTelegramLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-6 py-3.5 min-h-11 text-sm font-semibold text-slate-700 hover:border-brand-200 transition-colors"
-          >
-            <span className="truncate">Або {siteConfig.telegram.displayName}</span>
-          </a>
+          {!hideTelegramLink && (
+            <a
+              href={getTelegramLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-6 py-3.5 min-h-11 text-sm font-semibold text-slate-700 hover:border-brand-200 transition-colors"
+            >
+              <span className="truncate">Або {siteConfig.telegram.displayName}</span>
+            </a>
+          )}
         </div>
       </form>
     </div>

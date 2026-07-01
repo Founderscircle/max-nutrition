@@ -75,6 +75,24 @@ async function gql(query) {
   return res.json()
 }
 
+function extractPrimarySku(sku) {
+  return sku.match(/[0-9]{3,4}K?/)?.[0] ?? sku.split('-')[0]
+}
+
+function buildFlavors(item) {
+  const option = item.configurable_options?.find((o) => o.label === 'Смак') ?? item.configurable_options?.[0]
+  if (!item.variants?.length) return null
+
+  return item.variants.map((variant) => {
+    const attr = variant.attributes?.find((a) => option?.values?.some((v) => v.value_index === a.value_index))
+    return {
+      label: attr?.label || variant.product.name,
+      sku: extractPrimarySku(variant.product.sku),
+      image: cleanImage(variant.product.image?.url || variant.product.small_image?.url),
+    }
+  })
+}
+
 async function fetchAllGreenvibe() {
   const items = []
   for (let page = 1; page <= 5; page++) {
@@ -83,9 +101,25 @@ async function fetchAllGreenvibe() {
         total_count
         items {
           sku name
+          __typename
           image { url }
           small_image { url }
           description { html }
+          ... on ConfigurableProduct {
+            configurable_options {
+              label
+              attribute_code
+              values { label value_index }
+            }
+            variants {
+              product {
+                sku name
+                image { url }
+                small_image { url }
+              }
+              attributes { label value_index }
+            }
+          }
         }
       }
     }`)
@@ -112,15 +146,21 @@ async function main() {
 
   const products = []
   for (const g of gv) {
-    const image = cleanImage(g.image?.url || g.small_image?.url)
-    const primarySku = g.sku.match(/[0-9]{3,4}K?/)?.[0] ?? g.sku.split('-')[0]
-    const category = inferCategory(g.name, g.sku)
-    const plainDesc = g.description?.html?.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+    const flavors = g.__typename === 'ConfigurableProduct' ? buildFlavors(g) : null
+    if (g.__typename === 'ConfigurableProduct' && !flavors?.length) continue
 
-    products.push({
-      id: slugify(g.name, primarySku),
+    const primarySku = flavors?.length ? extractPrimarySku(g.sku) : extractPrimarySku(g.sku)
+    const primaryFlavor = flavors?.find((f) => f.sku === primarySku) ?? flavors?.[0]
+    const image =
+      primaryFlavor?.image || cleanImage(g.image?.url || g.small_image?.url)
+    const category = inferCategory(g.name, primarySku)
+    const plainDesc = g.description?.html?.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+    const name = g.name.replace(/\s*\(.*?\)\s*$/, '').trim() || g.name
+
+    const product = {
+      id: slugify(name, primarySku),
       sku: primarySku,
-      name: g.name.replace(/\s*\(.*?\)\s*$/, '').trim() || g.name,
+      name,
       category,
       shortDescription: plainDesc?.slice(0, 120) || buildDescription(g.name).split('.')[0] + '.',
       description: plainDesc?.slice(0, 600) || buildDescription(g.name),
@@ -131,8 +171,14 @@ async function main() {
       ],
       usage: 'Вживайте згідно з інструкцією на упаковці або рекомендаціями консультанта.',
       image,
-      popular: POPULAR.has(primarySku) || POPULAR.has(g.sku),
-    })
+      popular:
+        POPULAR.has(primarySku) ||
+        POPULAR.has(g.sku) ||
+        flavors?.some((f) => POPULAR.has(f.sku)),
+    }
+
+    if (flavors?.length) product.flavors = flavors
+    products.push(product)
   }
 
   // Перевірка зображень

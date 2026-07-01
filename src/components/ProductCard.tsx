@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import { Send, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import type { Product } from '../data/products'
 import { categoryLabels } from '../data/products'
-import { getProductTelegramMessage, getTelegramLink } from '../config/site'
 import { ProductImage } from './ProductImage'
+import { AddToListButton } from './AddToListButton'
 
 interface ProductCardProps {
   product: Product
@@ -33,6 +33,12 @@ export function ProductCard({ product, index = 0, animate = false }: ProductCard
               Популярне
             </span>
           )}
+          {product.flavors && product.flavors.length > 1 && (
+            <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 shadow-sm">
+              {product.flavors.length}{' '}
+              {product.flavors.length >= 5 ? 'смаків' : 'смаки'}
+            </span>
+          )}
         </div>
       </Link>
 
@@ -55,16 +61,14 @@ export function ProductCard({ product, index = 0, animate = false }: ProductCard
             <span className="truncate">Детальніше</span>
             <ArrowRight className="h-3.5 w-3.5 shrink-0" />
           </Link>
-          <a
-            href={getTelegramLink(getProductTelegramMessage(product.name, product.sku))}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex h-11 items-center justify-center gap-1 rounded-xl gradient-brand px-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow-md transition-all"
-            title="Замовити консультацію через Telegram"
-          >
-            <Send className="h-3.5 w-3.5 shrink-0" />
-            <span className="truncate">Telegram</span>
-          </a>
+          <AddToListButton
+            productId={product.id}
+            name={product.name}
+            sku={product.sku}
+            image={product.image}
+            compact
+            className="w-full"
+          />
         </div>
       </div>
     </article>

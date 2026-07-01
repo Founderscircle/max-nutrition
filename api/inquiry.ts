@@ -5,18 +5,41 @@ import { formatInquiryMessage, isTelegramConfigured, sendTelegramMessage } from 
 import { getClientIp, handleOptions, setCors } from '../lib/http'
 import type { InquiryPayload } from '../lib/types'
 
+import type { InquiryListItem, InquiryPayload } from '../lib/types'
+
+function isValidListItem(item: unknown): item is InquiryListItem {
+  if (!item || typeof item !== 'object') return false
+  const data = item as InquiryListItem
+  return (
+    typeof data.name === 'string' &&
+    data.name.trim().length > 0 &&
+    typeof data.sku === 'string' &&
+    data.sku.trim().length > 0 &&
+    typeof data.quantity === 'number' &&
+    data.quantity >= 1 &&
+    data.quantity <= 99
+  )
+}
+
 function isValidPayload(body: unknown): body is InquiryPayload {
   if (!body || typeof body !== 'object') return false
   const data = body as InquiryPayload
-  return (
-    (data.type === 'contact' || data.type === 'product') &&
+  const baseValid =
+    (data.type === 'contact' || data.type === 'product' || data.type === 'list') &&
     typeof data.name === 'string' &&
     data.name.trim().length >= 2 &&
     typeof data.contact === 'string' &&
     data.contact.trim().length >= 3 &&
     typeof data.message === 'string' &&
     data.message.trim().length >= 5
-  )
+
+  if (!baseValid) return false
+
+  if (data.type === 'list') {
+    return Array.isArray(data.listItems) && data.listItems.length > 0 && data.listItems.every(isValidListItem)
+  }
+
+  return true
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -67,6 +90,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       message: payload.message.trim(),
       productName,
       productSku,
+      listItems: payload.type === 'list' ? payload.listItems : undefined,
     }),
   )
 
