@@ -41,7 +41,7 @@ export function Footer() {
               <Send className="h-4 w-4" />
               {siteConfig.telegram.displayName}
             </a>
-            <p className="text-sm text-slate-500 mt-3">{siteConfig.distributor.city}, {siteConfig.distributor.country}</p>
+            <p className="text-sm text-slate-500 mt-3">{siteConfig.distributor.country}</p>
           </div>
         </div>
 

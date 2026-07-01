@@ -26,7 +26,7 @@ export function AboutPage() {
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Про мене</h1>
         <p className="mt-3 sm:mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
           Я — {siteConfig.distributor.names[0]}, незалежний дистриб'ютор
-          Herbalife Nutrition в {siteConfig.distributor.city}, {siteConfig.distributor.country}.
+          Herbalife Nutrition, {siteConfig.distributor.country}.
         </p>
       </div>
 

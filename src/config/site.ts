@@ -7,7 +7,6 @@ export const siteConfig = {
   },
   distributor: {
     names: ['Максим Іващенко'],
-    city: 'Київ',
     country: 'Україна',
     email: 'info@max-nutrition.net.ua',
     phone: '+380 XX XXX XX XX',

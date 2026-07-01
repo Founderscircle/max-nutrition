@@ -23,7 +23,7 @@ const contactMethods = [
     icon: MapPin,
     title: 'Локація',
     description: 'Працюємо по всій Україні',
-    value: `${siteConfig.distributor.city}, ${siteConfig.distributor.country}`,
+    value: siteConfig.distributor.country,
     primary: false,
   },
   {
