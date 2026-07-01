@@ -97,7 +97,7 @@ export function CatalogPage() {
           <p className="text-sm text-slate-400 mb-6">
             Знайдено: {filtered.length} {filtered.length === 1 ? 'продукт' : filtered.length < 5 ? 'продукти' : 'продуктів'}
           </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filtered.map((product, i) => (
               <ProductCard key={product.id} product={product} index={i} />
             ))}

@@ -14,7 +14,7 @@ interface ProductCardProps {
 export function ProductCard({ product, index = 0, animate = false }: ProductCardProps) {
   return (
     <article
-      className={`group flex flex-col overflow-hidden rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:shadow-brand-600/5 hover:border-brand-200 transition-all duration-300${animate ? ' animate-fade-in-up' : ''}`}
+      className={`group flex h-full flex-col overflow-hidden rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:shadow-brand-600/5 hover:border-brand-200 transition-all duration-300${animate ? ' animate-fade-in-up' : ''}`}
       style={animate ? { animationDelay: `${index * 40}ms` } : undefined}
     >
       <Link to={`/catalog/${product.id}`} className="relative aspect-square overflow-hidden bg-slate-100">
@@ -47,23 +47,23 @@ export function ProductCard({ product, index = 0, animate = false }: ProductCard
           {product.shortDescription}
         </p>
 
-        <div className="mt-4 flex flex-col sm:flex-row gap-2">
+        <div className="mt-auto grid grid-cols-2 gap-2 pt-4">
           <Link
             to={`/catalog/${product.id}`}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 px-3 py-3 min-h-11 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+            className="flex h-11 items-center justify-center gap-1 rounded-xl border border-slate-200 px-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
           >
-            Детальніше
-            <ArrowRight className="h-3.5 w-3.5" />
+            <span className="truncate">Детальніше</span>
+            <ArrowRight className="h-3.5 w-3.5 shrink-0" />
           </Link>
           <a
             href={getTelegramLink(getProductTelegramMessage(product.name, product.sku))}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl gradient-brand px-3 py-3 min-h-11 text-sm font-semibold text-white shadow-sm hover:shadow-md transition-all"
+            className="flex h-11 items-center justify-center gap-1 rounded-xl gradient-brand px-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow-md transition-all"
             title="Замовити консультацію через Telegram"
           >
             <Send className="h-3.5 w-3.5 shrink-0" />
-            Telegram
+            <span className="truncate">Telegram</span>
           </a>
         </div>
       </div>

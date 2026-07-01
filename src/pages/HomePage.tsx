@@ -84,7 +84,7 @@ export function HomePage() {
               Увесь каталог <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {popular.map((product, i) => (
               <ProductCard key={product.id} product={product} index={i} animate />
             ))}
