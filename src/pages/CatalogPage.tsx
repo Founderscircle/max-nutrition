@@ -33,7 +33,7 @@ export function CatalogPage() {
       <div className="mb-6 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Каталог продукції</h1>
         <p className="mt-2 text-sm sm:text-base text-slate-500">
-          {products.length} позицій · без цін · замовлення через Telegram
+          {products.length} позицій · замовлення через Telegram
         </p>
       </div>
 
