@@ -12,7 +12,8 @@
 import { readFileSync, existsSync } from 'fs'
 
 function loadEnvFile() {
-  if (!existsSync('.env')) return
+  if (!existsSync('.env')) return false
+  let loaded = 0
   for (const line of readFileSync('.env', 'utf8').split('\n')) {
     const trimmed = line.trim()
     if (!trimmed || trimmed.startsWith('#')) continue
@@ -20,8 +21,13 @@ function loadEnvFile() {
     if (eq === -1) continue
     const key = trimmed.slice(0, eq).trim()
     const value = trimmed.slice(eq + 1).trim()
-    if (!process.env[key]) process.env[key] = value
+    if (!value) continue
+    if (!process.env[key]) {
+      process.env[key] = value
+      loaded++
+    }
   }
+  return loaded > 0
 }
 
 async function telegram(method, body) {
@@ -51,7 +57,7 @@ function printChat(chat) {
 }
 
 async function main() {
-  loadEnvFile()
+  const envLoaded = loadEnvFile()
 
   const token = process.env.TELEGRAM_BOT_TOKEN
   const chatId = process.env.TELEGRAM_CHAT_ID
@@ -59,21 +65,20 @@ async function main() {
 
   if (!token) {
     console.error(`
-Потрібен токен бота.
+Потрібен токен бота.${existsSync('.env') ? ' Файл .env знайдено, але TELEGRAM_BOT_TOKEN порожній — збережіть файл (Cmd+S).' : ''}
 
 Кроки:
   1. Відкрийте @BotFather у Telegram
   2. /newbot → назва та username для бота
-  3. Скопіюйте токен
-  4. Напишіть своєму боту /start
-  5. Запустіть:
-
-     TELEGRAM_BOT_TOKEN=ВАШ_ТОКЕН node scripts/telegram-setup.mjs
-
-Або додайте TELEGRAM_BOT_TOKEN у файл .env у корені проєкту.
+  3. Скопіюйте токен у .env → TELEGRAM_BOT_TOKEN=...
+  4. Збережіть .env (Cmd+S)
+  5. Напишіть своєму боту /start
+  6. Запустіть: npm run telegram:setup
 `)
     process.exit(1)
   }
+
+  if (envLoaded) console.log('Завантажено змінні з .env')
 
   console.log('Перевірка бота...')
   const me = await telegram('getMe', {})
@@ -126,12 +131,14 @@ async function main() {
     console.log(`
 Додайте в Vercel → Settings → Environment Variables:
 
-  TELEGRAM_BOT_TOKEN=${token}
-  TELEGRAM_CHAT_ID=${lastChat.id}
+  TELEGRAM_BOT_TOKEN = (з вашого .env)
+  TELEGRAM_CHAT_ID = ${lastChat.id}
+
+Або натисніть «Import .env» і завантажте файл .env з проєкту.
 
 Потім Redeploy і перевірте:
 
-  TELEGRAM_BOT_TOKEN=${token} TELEGRAM_CHAT_ID=${lastChat.id} node scripts/telegram-setup.mjs --test
+  npm run telegram:test
 `)
   }
 }
