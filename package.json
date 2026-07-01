@@ -8,7 +8,9 @@
     "dev:full": "vercel dev",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "telegram:setup": "node scripts/telegram-setup.mjs",
+    "telegram:test": "node scripts/telegram-setup.mjs --test"
   },
   "dependencies": {
     "@upstash/redis": "^1.34.9",

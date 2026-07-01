@@ -59,7 +59,9 @@ npm run preview
 3. Додайте **Environment Variables** (див. `.env.example`):
    - `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` — заявки з форми
    - `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` — аналітика
-   - `SITE_URL` — `https://max-nutrition.net.ua`
+   - `SITE_URL` — `https://max-nutrition.in.ua`
+
+Детальна інструкція з Telegram: [docs/TELEGRAM-SETUP.md](docs/TELEGRAM-SETUP.md)
 4. Додайте домен `max-nutrition.net.ua` у Vercel → DNS у imena.ua
 
 ### API (serverless)

@@ -75,7 +75,7 @@ export function formatInquiryMessage(payload: {
     lines.push('', `<b>Повідомлення:</b>`, escapeHtml(payload.message))
   }
 
-  lines.push('', `<i>Max Nutrition · max-nutrition.net.ua</i>`)
+  lines.push('', `<i>Max Nutrition · max-nutrition.in.ua</i>`)
 
   return lines.join('\n')
 }
