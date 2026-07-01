@@ -7,10 +7,10 @@ export function LegalBanner() {
         <Info className="h-3.5 w-3.5 shrink-0 opacity-80 mt-0.5 sm:mt-0" />
         <span className="min-w-0 text-balance">
           <span className="sm:hidden">
-            Незалежний дистриб'ютор · Без цін · Замовлення через <strong>Telegram</strong>
+            Незалежний дистриб'ютор · Замовлення через <strong>Telegram</strong>
           </span>
           <span className="hidden sm:inline">
-            Інформаційний сайт незалежного дистриб'ютора · Без цін та реклами · Замовлення через{' '}
+            Інформаційний сайт незалежного дистриб'ютора · Замовлення через{' '}
             <strong>Telegram</strong>
           </span>
         </span>

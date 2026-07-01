@@ -36,13 +36,12 @@ export function Footer() {
               href={getTelegramLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-medium text-sm mb-3"
+              className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-medium text-sm"
             >
               <Send className="h-4 w-4" />
               {siteConfig.telegram.displayName}
             </a>
-            <p className="text-sm text-slate-500 mt-1 break-all">{siteConfig.distributor.email}</p>
-            <p className="text-sm text-slate-500 mt-1">{siteConfig.distributor.city}, {siteConfig.distributor.country}</p>
+            <p className="text-sm text-slate-500 mt-3">{siteConfig.distributor.city}, {siteConfig.distributor.country}</p>
           </div>
         </div>
 

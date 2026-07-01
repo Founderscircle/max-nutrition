@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Send, Shield, BookOpen, MessageCircle, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { Send, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { siteConfig, getTelegramLink } from '../config/site'
 import { getPopularProducts, getProductById } from '../data/products'
 import { ProductCard } from '../components/ProductCard'
@@ -8,24 +8,6 @@ import { HeroVisual } from '../components/HeroVisual'
 import { SectionOrb } from '../components/effects/SectionOrb'
 import { SiteStatsBar } from '../components/SiteStatsBar'
 import { useSiteStats } from '../hooks/useSiteStats'
-
-const features = [
-  {
-    icon: Shield,
-    title: 'Відповідність правилам',
-    text: 'Сайт-візитка без цін та комерційної реклами згідно з вимогами Herbalife в Україні.',
-  },
-  {
-    icon: BookOpen,
-    title: 'Повний каталог',
-    text: 'Детальна інформація про продукцію: склад, спосіб застосування, опис.',
-  },
-  {
-    icon: MessageCircle,
-    title: 'Консультація в Telegram',
-    text: 'Персональна консультація та оформлення замовлення через месенджер.',
-  },
-]
 
 export function HomePage() {
   const { stats } = useSiteStats()
@@ -46,7 +28,7 @@ export function HomePage() {
             <div className="animate-fade-in-up order-2 lg:order-1">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-100 px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium text-brand-700 mb-4 sm:mb-6">
                 <CheckCircle2 className="h-4 w-4 shrink-0" />
-                Незалежний дистриб'ютор · Україна
+                Незалежний дистриб'ютор
               </span>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight">
                 Продукція{' '}
@@ -73,7 +55,7 @@ export function HomePage() {
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-slate-200 px-6 py-3.5 min-h-11 text-base font-semibold text-slate-700 shadow-sm hover:shadow-md hover:border-brand-200 transition-all"
                 >
                   <Send className="h-5 w-5 text-brand-600 shrink-0" />
-                  <span className="truncate">Консультація в Telegram</span>
+                  <span className="truncate">Написати в Telegram</span>
                 </a>
               </div>
             </div>
@@ -86,23 +68,6 @@ export function HomePage() {
       </section>
 
       <SiteStatsBar />
-
-      <section className="relative mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
-        <div className="grid gap-6 md:grid-cols-3">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="rounded-2xl bg-white border border-slate-200/80 p-6 shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 mb-4">
-                <f.icon className="h-6 w-6 text-brand-600" />
-              </div>
-              <h3 className="font-semibold text-slate-900 mb-2">{f.title}</h3>
-              <p className="text-sm text-slate-500 leading-relaxed">{f.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section className="relative mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
         <CategoryGrid />

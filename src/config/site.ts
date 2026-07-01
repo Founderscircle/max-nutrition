@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: 'Max Nutrition',
-  tagline: 'Незалежний дистриб\'ютор Herbalife в Україні',
+  tagline: 'Незалежний дистриб\'ютор Herbalife',
   telegram: {
     username: 'max_nutrition_herbalife',
     displayName: '@max_nutrition_herbalife',

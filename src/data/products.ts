@@ -42,7 +42,7 @@ export const categoryDescriptions: Record<ProductCategory, string> = {
   snacks: 'Протеїнові батончики, чіпси та кава',
   skincare: 'Лінійки Herbalife SKIN та HL/Skin для обличчя',
   bodycare: 'Herbal Aloe — догляд за тілом та волоссям',
-  sports: 'Herbalife24, CR7 Drive — спортивне харчування',
+  sports: 'Herbalife24 — спортивне харчування',
   accessories: 'Шейкери, мірні ложки та аксесуари',
 }
 

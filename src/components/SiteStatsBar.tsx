@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Eye, Package, MessageSquare, TrendingUp } from 'lucide-react'
+import { Package, MessageSquare, TrendingUp } from 'lucide-react'
 import { useSiteStats } from '../hooks/useSiteStats'
 import { getProductById } from '../data/products'
 
@@ -16,6 +16,22 @@ export function SiteStatsBar() {
     .filter(Boolean)
     .slice(0, 4)
 
+  const showInquiries = stats.inquiriesTotal > 0
+  const showTrending = trending.length > 0
+
+  if (!showInquiries && !showTrending) {
+    return (
+      <section className="border-y border-slate-200/80 bg-white/90 sm:bg-white/70">
+        <div className="mx-auto max-w-6xl px-4 py-3 sm:px-6">
+          <span className="inline-flex items-center gap-1.5 text-sm text-slate-600">
+            <Package className="h-4 w-4 text-brand-600 shrink-0" />
+            <strong className="text-slate-800">{stats.productCount}</strong> продуктів у каталозі
+          </span>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className="border-y border-slate-200/80 bg-white/90 sm:bg-white/70">
       <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6">
@@ -25,11 +41,7 @@ export function SiteStatsBar() {
               <Package className="h-4 w-4 text-brand-600 shrink-0" />
               <strong className="text-slate-800">{stats.productCount}</strong> продуктів
             </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Eye className="h-4 w-4 text-brand-600 shrink-0" />
-              <strong className="text-slate-800">{stats.viewsToday}</strong> переглядів сьогодні
-            </span>
-            {stats.inquiriesTotal > 0 && (
+            {showInquiries && (
               <span className="inline-flex items-center gap-1.5">
                 <MessageSquare className="h-4 w-4 text-brand-600 shrink-0" />
                 <strong className="text-slate-800">{stats.inquiriesTotal}</strong> заявок
@@ -37,13 +49,13 @@ export function SiteStatsBar() {
             )}
           </div>
 
-          {trending.length > 0 && (
+          {showTrending && (
             <div className="min-w-0">
               <span className="inline-flex items-center gap-1 text-sm text-slate-500 mb-2">
                 <TrendingUp className="h-4 w-4 shrink-0" />
                 Зараз цікавлять:
               </span>
-              <div className="-mx-4 px-4 flex gap-2 overflow-x-auto pb-1 snap-x snap-mandatory scrollbar-thin sm:flex-wrap sm:overflow-visible sm:mx-0 sm:px-0">
+              <div className="-mx-4 px-4 flex gap-2 overflow-x-auto pb-1 snap-x snap-mandatory sm:flex-wrap sm:overflow-visible sm:mx-0 sm:px-0">
                 {trending.map((product) => (
                   <Link
                     key={product!.id}
