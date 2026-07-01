@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { Search, Filter } from 'lucide-react'
 import { products, categoryLabels, type ProductCategory } from '../data/products'
 import { ProductCard } from '../components/ProductCard'
+import { TodayBonusPromo } from '../components/TodayBonusPromo'
 
 export function CatalogPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -35,6 +36,10 @@ export function CatalogPage() {
         <p className="mt-2 text-sm sm:text-base text-slate-500">
           Замовлення через Telegram
         </p>
+      </div>
+
+      <div className="mb-8">
+        <TodayBonusPromo compact />
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 mb-8">

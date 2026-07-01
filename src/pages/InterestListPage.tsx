@@ -5,6 +5,7 @@ import { ProductImage } from '../components/ProductImage'
 import { QuantityPicker } from '../components/QuantityPicker'
 import { getInterestListTelegramMessage, getTelegramLink, siteConfig } from '../config/site'
 import { getProductById } from '../data/products'
+import { TodayBonusPromo } from '../components/TodayBonusPromo'
 
 export function InterestListPage() {
   const { items, totalCount, updateQuantity, removeItem, clearList } = useInterestList()
@@ -20,6 +21,9 @@ export function InterestListPage() {
           {siteConfig.legal.cartPromoNote} Додайте продукти з каталогу та надішліть кошик для
           узгодження замовлення.
         </p>
+        <div className="mt-8 text-left">
+          <TodayBonusPromo compact />
+        </div>
         <Link
           to="/catalog"
           className="mt-8 inline-flex items-center gap-2 rounded-xl gradient-brand px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-600/20 hover:shadow-xl transition-all"
@@ -50,7 +54,11 @@ export function InterestListPage() {
         </button>
       </div>
 
-      <div className="mt-8 rounded-2xl border border-brand-100 bg-brand-50 p-4 text-sm text-brand-800 leading-relaxed">
+      <div className="mt-8">
+        <TodayBonusPromo compact />
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-brand-100 bg-brand-50 p-4 text-sm text-brand-800 leading-relaxed">
         {siteConfig.legal.cartPromoNote} {siteConfig.legal.orderNote} Ціни та умови замовлення
         узгоджуються під час консультації.
       </div>

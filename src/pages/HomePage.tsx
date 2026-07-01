@@ -7,6 +7,7 @@ import { CategoryGrid } from '../components/CategoryCard'
 import { HeroVisual } from '../components/HeroVisual'
 import { SectionOrb } from '../components/effects/SectionOrb'
 import { SiteStatsBar } from '../components/SiteStatsBar'
+import { TodayBonusPromo } from '../components/TodayBonusPromo'
 import { useSiteStats } from '../hooks/useSiteStats'
 
 export function HomePage() {
@@ -68,6 +69,10 @@ export function HomePage() {
       </section>
 
       <SiteStatsBar />
+
+      <section className="mx-auto max-w-6xl px-4 pt-8 sm:pt-10 sm:px-6">
+        <TodayBonusPromo showCatalogLink />
+      </section>
 
       <section className="relative mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
         <CategoryGrid />
