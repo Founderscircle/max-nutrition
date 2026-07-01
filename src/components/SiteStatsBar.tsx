@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Package, MessageSquare, TrendingUp } from 'lucide-react'
+import { MessageSquare, TrendingUp } from 'lucide-react'
 import { useSiteStats } from '../hooks/useSiteStats'
 import { getProductById } from '../data/products'
 
@@ -19,35 +19,20 @@ export function SiteStatsBar() {
   const showInquiries = stats.inquiriesTotal > 0
   const showTrending = trending.length > 0
 
-  if (!showInquiries && !showTrending) {
-    return (
-      <section className="border-y border-slate-200/80 bg-white/90 sm:bg-white/70">
-        <div className="mx-auto max-w-6xl px-4 py-3 sm:px-6">
-          <span className="inline-flex items-center gap-1.5 text-sm text-slate-600">
-            <Package className="h-4 w-4 text-brand-600 shrink-0" />
-            <strong className="text-slate-800">{stats.productCount}</strong> продуктів у каталозі
-          </span>
-        </div>
-      </section>
-    )
-  }
+  if (!showInquiries && !showTrending) return null
 
   return (
     <section className="border-y border-slate-200/80 bg-white/90 sm:bg-white/70">
       <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6">
         <div className="flex flex-col gap-4">
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600">
-            <span className="inline-flex items-center gap-1.5">
-              <Package className="h-4 w-4 text-brand-600 shrink-0" />
-              <strong className="text-slate-800">{stats.productCount}</strong> продуктів
-            </span>
-            {showInquiries && (
+          {showInquiries && (
+            <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600">
               <span className="inline-flex items-center gap-1.5">
                 <MessageSquare className="h-4 w-4 text-brand-600 shrink-0" />
                 <strong className="text-slate-800">{stats.inquiriesTotal}</strong> заявок
               </span>
-            )}
-          </div>
+            </div>
+          )}
 
           {showTrending && (
             <div className="min-w-0">
