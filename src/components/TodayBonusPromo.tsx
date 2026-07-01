@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Gift, BookOpen } from 'lucide-react'
 import { siteConfig } from '../config/site'
-import { useKyivCountdown } from '../hooks/useKyivCountdown'
+import { useOfferCountdown } from '../hooks/useOfferCountdown'
 
 interface TodayBonusPromoProps {
   compact?: boolean
@@ -20,7 +20,7 @@ function TimeBlock({ value, label }: { value: number; label: string }) {
 }
 
 export function TodayBonusPromo({ compact = false, showCatalogLink = false }: TodayBonusPromoProps) {
-  const { hours, minutes, seconds } = useKyivCountdown()
+  const { hours, minutes, seconds } = useOfferCountdown()
   const { todayBonus } = siteConfig.legal
 
   if (compact) {
@@ -33,15 +33,22 @@ export function TodayBonusPromo({ compact = false, showCatalogLink = false }: To
             </div>
             <div className="min-w-0">
               <p className="font-semibold text-slate-900 text-sm sm:text-base">{todayBonus.title}</p>
-              <p className="mt-0.5 text-xs sm:text-sm text-slate-600 line-clamp-2">{todayBonus.description}</p>
+              <p className="mt-0.5 text-xs sm:text-sm text-slate-600 line-clamp-2">
+                {todayBonus.description}
+              </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 shrink-0 self-center sm:self-auto">
-            <TimeBlock value={hours} label="год" />
-            <span className="text-brand-400 font-bold pb-4">:</span>
-            <TimeBlock value={minutes} label="хв" />
-            <span className="text-brand-400 font-bold pb-4">:</span>
-            <TimeBlock value={seconds} label="сек" />
+          <div className="shrink-0 self-center sm:self-auto text-center sm:text-right">
+            <p className="text-[10px] sm:text-xs font-medium text-slate-500 mb-2">
+              {todayBonus.timerLabel}
+            </p>
+            <div className="flex items-center gap-2">
+              <TimeBlock value={hours} label="год" />
+              <span className="text-brand-400 font-bold pb-4">:</span>
+              <TimeBlock value={minutes} label="хв" />
+              <span className="text-brand-400 font-bold pb-4">:</span>
+              <TimeBlock value={seconds} label="сек" />
+            </div>
           </div>
         </div>
         <p className="mt-3 text-[11px] text-slate-500 leading-relaxed">{todayBonus.disclaimer}</p>
@@ -55,7 +62,7 @@ export function TodayBonusPromo({ compact = false, showCatalogLink = false }: To
         <div className="min-w-0 flex-1">
           <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800 mb-3">
             <Gift className="h-3.5 w-3.5" />
-            Пропозиція дня
+            {todayBonus.badge}
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900">{todayBonus.title}</h2>
           <p className="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl">
@@ -69,7 +76,7 @@ export function TodayBonusPromo({ compact = false, showCatalogLink = false }: To
 
         <div className="shrink-0 text-center">
           <p className="text-xs font-medium text-slate-500 mb-3 uppercase tracking-wide">
-            Залишилось сьогодні
+            {todayBonus.timerLabel}
           </p>
           <div className="flex items-center justify-center gap-2 sm:gap-3">
             <TimeBlock value={hours} label="годин" />
