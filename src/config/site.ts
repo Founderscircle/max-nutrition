@@ -6,7 +6,7 @@ export const siteConfig = {
     displayName: '@max_nutrition_herbalife',
   },
   distributor: {
-    names: ['Максим'],
+    names: ['Максим Іващенко'],
     city: 'Київ',
     country: 'Україна',
     email: 'info@max-nutrition.net.ua',
