@@ -1,6 +1,5 @@
 import { Send, Mail, MapPin, Clock, MessageSquare } from 'lucide-react'
 import { siteConfig, getTelegramLink } from '../config/site'
-import { InquiryForm } from '../components/InquiryForm'
 
 const contactMethods = [
   {
@@ -96,13 +95,6 @@ export function ContactPage() {
         ))}
       </div>
 
-      <div id="form" className="mt-10 sm:mt-12 scroll-mt-28 sm:scroll-mt-24">
-        <InquiryForm
-          title="Залишити заявку на консультацію"
-          description="Заповніть форму — заявка одразу надійде консультанту. Відповімо протягом 1–2 годин."
-        />
-      </div>
-
       <div className="mt-10 sm:mt-12 rounded-2xl bg-white border border-slate-200 p-5 sm:p-8">
         <div className="flex items-start sm:items-center gap-3 mb-4">
           <MessageSquare className="h-6 w-6 text-brand-600 shrink-0" />
@@ -110,7 +102,7 @@ export function ContactPage() {
         </div>
         <ol className="space-y-4">
           {[
-            'Напишіть нам у Telegram або оберіть продукт у каталозі та натисніть кнопку «Telegram».',
+            'Напишіть нам у Telegram або зберіть кошик у каталозі та надішліть його консультанту.',
             'Консультант відповість на ваші запитання та допоможе підібрати продукцію.',
             'Після узгодження деталей (асортимент, кількість, доставка) оформлюється замовлення.',
             'Ви отримаєте підтвердження та інформацію про доставку.',

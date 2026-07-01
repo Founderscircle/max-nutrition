@@ -7,7 +7,6 @@ import { ProductImage } from '../components/ProductImage'
 import { FlavorPicker } from '../components/FlavorPicker'
 import { QuantityPicker } from '../components/QuantityPicker'
 import { AddToListButton } from '../components/AddToListButton'
-import { InquiryForm } from '../components/InquiryForm'
 import { useProductTracking } from '../hooks/usePageTracking'
 
 export function ProductDetailPage() {
@@ -111,19 +110,6 @@ export function ProductDetailPage() {
             <Send className="h-5 w-5" />
             Замовити консультацію в Telegram
           </a>
-
-          <div className="mt-8">
-            <InquiryForm
-              type="product"
-              productId={product.id}
-              productName={product.name}
-              productSku={activeSku}
-              productFlavor={selectedFlavor?.label}
-              compact
-              title="Або залишити заявку"
-              description="Консультант отримає запит і зв'яжеться з вами."
-            />
-          </div>
 
           <div className="mt-8">
             <h2 className="font-semibold text-slate-900 mb-3">Переваги</h2>

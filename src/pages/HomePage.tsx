@@ -101,9 +101,8 @@ export function HomePage() {
             </h2>
             <p className="text-brand-100 text-sm sm:text-base max-w-xl mx-auto mb-6 sm:mb-8">
               Консультант {siteConfig.distributor.names[0]} допоможе підібрати
-              продукцію та оформити замовлення. Напишіть у Telegram або залиште заявку на сторінці контактів.
+              продукцію та оформити замовлення. Напишіть у Telegram або зберіть кошик у каталозі.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
             <a
               href={getTelegramLink('Вітаю! Хочу отримати консультацію та дізнатися про умови замовлення.')}
               target="_blank"
@@ -111,15 +110,8 @@ export function HomePage() {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 sm:px-8 py-3.5 sm:py-4 min-h-11 text-sm sm:text-base font-bold text-brand-700 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
             >
               <Send className="h-5 w-5 shrink-0" />
-              <span className="truncate">Telegram</span>
+              <span className="truncate">Написати в Telegram</span>
             </a>
-            <Link
-              to="/contact#form"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-6 sm:px-8 py-3.5 sm:py-4 min-h-11 text-sm sm:text-base font-bold text-white hover:bg-white/20 transition-all"
-            >
-              Залишити заявку
-            </Link>
-            </div>
           </div>
         </div>
       </section>
