@@ -15,7 +15,7 @@ export function Footer() {
               <span className="font-bold text-slate-900">{siteConfig.name}</span>
             </div>
             <p className="text-sm text-slate-500 leading-relaxed">
-              {siteConfig.tagline}. Інформаційний сайт-візитка з каталогом продукції.
+              {siteConfig.tagline}
             </p>
           </div>
 
