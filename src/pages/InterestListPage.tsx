@@ -3,7 +3,6 @@ import { Send, Trash2, ShoppingCart, ArrowRight } from 'lucide-react'
 import { useInterestList } from '../context/InterestListContext'
 import { ProductImage } from '../components/ProductImage'
 import { QuantityPicker } from '../components/QuantityPicker'
-import { InquiryForm } from '../components/InquiryForm'
 import { getInterestListTelegramMessage, getTelegramLink, siteConfig } from '../config/site'
 import { getProductById } from '../data/products'
 
@@ -130,17 +129,6 @@ export function InterestListPage() {
         >
           Додати ще продукти
         </Link>
-      </div>
-
-      <div className="mt-6">
-        <InquiryForm
-          type="list"
-          listItems={items}
-          hideTelegramLink
-          title="Або залишити контакт"
-          description="Консультант отримає ваш кошик і зв'яжеться з вами — навіть якщо ви не відкрили Telegram."
-          onSuccess={clearList}
-        />
       </div>
     </div>
   )
